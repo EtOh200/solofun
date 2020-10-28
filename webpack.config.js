@@ -6,7 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js' 
   }, 
-  mode: 'process.env.NODE_ENV',
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -14,14 +14,19 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'], 
+          }
         }
       },
-      {
-        test: /\.s[ac]ss$/i, 
-        // /\.s?css$/ s is optional, and its looking at global search. 
-        use: ['style-loader', 'css-loader', 'sass-loader'], 
-      }
+      // {
+      //   test: /\.s[ac]ss$/i, 
+      //   // /\.s?css$/ s is optional, and its looking at global search. 
+      //   use: ['style-loader', 'css-loader', 'sass-loader'], 
+      // }
     ]
+  },
+  devServer: {
+    publicPath: '/build',
   }
 }

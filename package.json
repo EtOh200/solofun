@@ -2,11 +2,13 @@
   "name": "solofun",
   "version": "1.0.0",
   "description": "app to show movie by actor or todo with google cal",
-  "main": "./server/server.js",
+  "main": "./server",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon server/server.js"
+    "start": "cross-env NODE_ENV=development node server/server.js",
+    "build": "cross-env NODE_ENV=production webpack --hot",
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack serve --hot\""
   },
+  
   "author": "Joe C",
   "license": "ISC",
   "devDependencies": {
@@ -14,6 +16,7 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "babel-loader": "^8.1.0",
+    "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.0",
     "nodemon": "^2.0.6",
@@ -30,5 +33,14 @@
     "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EtOh200/solofun.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/EtOh200/solofun/issues"
+  },
+  "homepage": "https://github.com/EtOh200/solofun#readme"
 }
