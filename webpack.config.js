@@ -29,4 +29,4 @@ module.exports = {
   devServer: {
     publicPath: '/build',
   }
-}
+} 

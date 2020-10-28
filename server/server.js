@@ -5,7 +5,7 @@ const path = require('path')
 dotenv.config({ path: './config/config.env' })
 
 const app = express()
-
+ 
 const PORT = process.env.PORT || 3030
 
 app.use('/build', express.static(path.resolve(__dirname, '/build/bundle.js')));
