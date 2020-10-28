@@ -8,7 +8,8 @@ const app = express()
  
 const PORT = process.env.PORT || 3030
 
-app.use('/build', express.static(path.resolve(__dirname, '../build')));
+app.use('/build', express.static(path.resolve(__dirname, '../build'))); //serve everything inside build folder
+
 //serve everything inside build folder. 
 
 app.get('/', (req, res) => {  
