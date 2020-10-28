@@ -1,8 +1,11 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const path = require('path')
+const connectDB = require('../config/db') //connect MongoDB with server
 
 dotenv.config({ path: './config/config.env' })
+
+connectDB()
 
 const app = express()
  
