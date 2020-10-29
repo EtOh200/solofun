@@ -1,25 +1,23 @@
 const mongoose = require('mongoose')
 
 const TodoSchema = new mongoose.Schema({
-  googleId: {
+  todoTitle: {
     type: String,
     required: true
   },
-  displayName: {
+  task: {
     type: String,
     required: true
   },  
-  firstName: {
+  status: {
     type: String,
-    required: true
+    default: 'public',
+    enum: ['public', 'private']
   },  
-  lastName: {
-    type: String,
-    required: true
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },  
-  image: {
-    type: String
-  },
   createdAt: {
     type: Date,
     default: Date.now

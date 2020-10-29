@@ -14,6 +14,7 @@ const { ensureAuth, ensureGuest } = require('../routes/logged')
 const authRoute = require('../routes/auth')
 
 const connectDB = require('../config/db') //connect MongoDB with server
+const Todo = require('../models/Todo')
 
 
 //load config
@@ -61,18 +62,30 @@ app.get('/', ensureGuest, (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
+
 //check if logged in
-app.get('/dashboard', ensureAuth, (req,res) => {
-  res.render('http://localhost:8080/dashboard', {
-    name: req.user.firstName,
-  })
+app.get('/dashboard', ensureAuth, async (req,res) => {
+  try {
+    const todo = await Todo.find({ user: req.user.id }).lean()
+    res.render('http://localhost:8080/dashboard', {
+      name: req.user.firstName,
+      todo
+    })
+    
+  } catch (err) {
+    console.error(err)
+    res.render('error no todo found')
+  }
 })
 
 //routes for login auth
 app.use('/login', authRoute)
 
 //create LogOut?
-
+app.get('/logout', (req,res) => {
+  req.logout()
+  res.redirect('/')
+})
 
 //set listen ports
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
