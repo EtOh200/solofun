@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
-import Login from "./Login";
-import Dashboard from "./Dashboard"
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard"
 
 //have switch statement inside render to pick components to render
 const App = () => {
@@ -27,4 +27,4 @@ const App = () => {
 };
 
 
-export default App; 
+export default App;

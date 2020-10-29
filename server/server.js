@@ -1,10 +1,14 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const mongoose = require('mongoose')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const MongoStore = require('connect-mongo')(session)
+
+const { ensureAuth, ensureGuest } = require('../routes/logged')
 
 //require routes for auth
 const authRoute = require('../routes/auth')
@@ -38,6 +42,7 @@ app.use( //session is saved when login success. expression session doc
   secret: 'keyboard cat',
   resave: false, //session not saved if nothing modified 
   saveUninitialized: false, //not saved until data is stored
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 )
 
@@ -52,9 +57,17 @@ app.use('/build', express.static(path.resolve(__dirname, '../build'))); //serve 
 // app.use(express.static(path.join(__dirname, '/')))
 
 //root directory sends it to index.html
-app.get('/', (req, res) => {  
+app.get('/', ensureGuest, (req, res) => {  
   res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
+
+//check if logged in
+app.get('/dashboard', ensureAuth, (req,res) => {
+  res.render('http://localhost:8080/dashboard', {
+    name: req.user.firstName,
+  })
+})
+
 //routes for login auth
 app.use('/login', authRoute)
 

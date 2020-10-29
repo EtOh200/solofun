@@ -14,4 +14,11 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
   res.redirect('http://localhost:8080/dashboard') //redirect to dashboard after login success. Else redirect to login page. 
 })
 
+//Logout user
+router.get('/logout', (req,res) => {
+  req.logout()
+  res.redirect('/')
+})
+
+
 module.exports = router
