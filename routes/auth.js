@@ -11,7 +11,8 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 //google auth callback
 //should route to /auth/google/callback(/login/callback)
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/dashboard').send(console.log('GOT DASH')) //redirect to dashboard after login success. Else redirect to login page. 
+  res.send('Dash')
+  // .redirect('/dashboard') //redirect to dashboard after login success. Else redirect to login page. 
 })
 
 module.exports = router

@@ -21,11 +21,11 @@ module.exports = {
           }
         }
       },
-      // {
-      //   test: /\.s[ac]ss$/i, 
-      //   // /\.s?css$/ s is optional, and its looking at global search. 
-      //   use: ['style-loader', 'css-loader', 'sass-loader'], 
-      // }
+      {
+        test: /\.s[ac]ss$/i, 
+        // /\.s?css$/ s is optional, and its looking at global search. 
+        use: ['style-loader', 'css-loader', 'sass-loader'], 
+      }
     ]
   },
   devServer: {

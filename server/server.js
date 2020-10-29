@@ -4,6 +4,7 @@ const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
 //require routes for auth
 const authRoute = require('../routes/auth')
@@ -20,6 +21,10 @@ require('../config/passport')(passport)
 connectDB()
 
 const app = express()
+
+if(process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
 const PORT = process.env.PORT || 3030
 
@@ -42,6 +47,9 @@ app.use(passport.session())
 
 //serve everything inside build folder. (static?)
 app.use('/build', express.static(path.resolve(__dirname, '../build'))); //serve everything inside build folder
+
+//static for scss? 
+// app.use(express.static(path.join(__dirname, '/')))
 
 //root directory sends it to index.html
 app.get('/', (req, res) => {  
