@@ -1,6 +1,10 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
 html,
 body {
   height: 100%;
+  background-color: #b3b3b3;
 }
 
 html {
@@ -11,4 +15,14 @@ html {
 body {
   display: table-cell;
   vertical-align: middle;
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+table {
+  color: #27496e;
+  border-collapse: separate;
+  border-spacing: 30px;
+  th {
+    text-align: left;
+  }
 }

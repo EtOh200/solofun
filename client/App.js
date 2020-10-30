@@ -9,7 +9,7 @@ const App = () => {
   
     return (
       <div>
-        <strong> My Solo App boo</strong>
+       <h1><strong>teamSpace</strong></h1>
         <Switch>
         <Route 
         exact
